@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>30th Birthday Challenge</title>
+    <style>
+        body { background-color: #0a0a0a; color: #00ff41; font-family: 'Microsoft JhengHei', monospace; margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        #game-container { background: rgba(20, 20, 20, 0.95); padding: 30px; border: 2px solid #00ff41; border-radius: 15px; width: 85%; max-width: 800px; z-index: 10; box-shadow: 0 0 30px rgba(0,255,65,0.3); position: relative; }
+        .page { display: none; }
+        .active { display: block; }
+        h2 { border-bottom: 1px solid #00ff41; padding-bottom: 10px; color: #fff; margin-top: 0; }
+        .question-list { text-align: left; max-height: 350px; overflow-y: auto; margin-bottom: 20px; padding-right: 10px; font-size: 0.95rem; line-height: 1.6; }
+        .question-item { margin-bottom: 15px; border-left: 3px solid #00ff41; padding-left: 10px; }
+        .input-area { display: flex; align-items: center; gap: 15px; border-top: 1px dashed #444; padding-top: 20px; }
+        input { background: #000; border: 1px solid #00ff41; color: #00ff41; padding: 10px; font-size: 1.2rem; letter-spacing: 5px; text-transform: uppercase; width: 180px; text-align: center; }
+        button { background: #00ff41; color: #000; border: none; padding: 12px 25px; font-size: 1rem; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        button:hover { background: #fff; box-shadow: 0 0 10px #fff; }
+        #fireworks { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .error { color: #ff5555; font-size: 0.9rem; margin-top: 10px; visibility: hidden; font-weight: bold; }
+        #typewriter { white-space: pre-wrap; font-size: 1.8rem; }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <div id="page-start" class="page active" style="text-align:center;">
+        <h1>>> 30 歲慶生解密系統</h1>
+        <p style="color:#888;">這是一場關於英雄、後宮與燒肉的最終考驗</p>
+        <button onclick="nextPage('page1')">開始破解</button>
+    </div>
+
+    <div id="page1" class="page">
+        <h2>MISSION 01: 我的英雄學院</h2>
+        <div class="question-list">
+            <div class="question-item">1. 抹消磁頭的繃帶是什麼做的？<br>A.碳素纖維+鋼鐵線<br>B.碳素纖維+合金<br>C.鋼鐵纖維+碳<br>D.鋼鐵纖維+合金</div>
+            <div class="question-item">2. 心操同學在運動會上讓綠谷進入呆滯狀況幾次？<br>A.1<br>B.2<br>C.3<br>D.4</div>
+            <div class="question-item">3. 運動會的騎馬打仗的第一名組員是？<br>A.八百萬百、轟、飯田天哉、瀨呂範太 <br>B.八百萬百、轟、飯田天哉、上鳴電氣 <br>C.八百萬百、轟、飯田天哉、葉隱透 <br>D.八百萬百、轟、飯田天哉、尾白猿夫</div>
+            <div class="question-item">4. 綠谷出久的爸爸媽媽是什麼能力？<br>A.修復/引力 <br>B.冰凍/磁力 <br>C.噴火/引力 <br>D.修復/磁力</div>
+            <div class="question-item">5. 歐爾麥特的個資 何者不正確？<br>A.生日6/10 <br>B.身高200 <br>C.血型A型 <br>D.出生地：東京都</div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="ans1" maxlength="5" placeholder="輸入代碼">
+            <button onclick="checkStep(1, 'BCBCB', 'page2')">下一關 ></button>
+        </div>
+        <div id="err1" class="error">!! 1000% 底特律爆碎風 !!</div>
+    </div>
+
+    <div id="page2" class="page">
+        <h2>MISSION 02: 後宮甄嬛傳</h2>
+        <div class="question-list">
+            <div class="question-item">1. 選秀時，甄嬛替陵容簪的花是什麼花?<br>A.芍藥<br>B.牡丹<br>C.秋海棠<br>D.桂花</div>
+            <div class="question-item">2. 眉莊的拿手料理是哪道?<br>A.藕粉桂花糖糕<br>B.牡丹糕<br>C.蟹粉酥<br>D.蓮子百合湯</div>
+            <div class="question-item">3. {嬛嬛一裊楚宮腰}是誰的詞？<br>A.蔡伸<br>B.李白<br>C.曹植<br>D.孟子</div>
+            <div class="question-item">4. 以下哪句名言對應的人物錯誤？<br>A.翠果，打爛她的嘴-齊妃<br>B.寶娟，我的嗓子-安小鳥<br>C.剪秋，本宮的頭好痛-皇后<br>D.姊姊追著姊姊-沈眉庄</div>
+            <div class="question-item">5. 關於安陵容合成"鵝黎帳中香"正確的是?<br>A.沉香+檀香+鵝黎→蒸餾→鵝黎帳中香<br>B.沉香+檀香+鵝黎→加熱→鵝黎帳中香<br> C.沉香+松香+鵝黎→高溫→鵝黎帳中香<br> D.沉香+松香+鵝黎→蒸餾→鵝黎帳中香</div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="ans2" maxlength="5" placeholder="輸入代碼">
+            <button onclick="checkStep(2, 'CAADB', 'page3')">下一關 ></button>
+        </div>
+        <div id="err2" class="error">!! 皇桑~你害的臣妾好苦啊~ !!</div>
+    </div>
+
+    <div id="page3" class="page">
+        <h2>MISSION 03: 蠟筆小新電影</h2>
+        <div class="question-list">
+            <div class="question-item">1. 以下電影順序何者正確?<br>A.電擊！豬蹄大作戰>搞怪遊樂園大冒險>風起雲湧的叢林冒險>風起雲湧 猛烈！大人帝國的反擊<br>B.搞怪遊樂園大冒險>風起雲湧 猛烈！大人帝國的反擊>電擊！豬蹄大作戰>風起雲湧的叢林冒險<br>C.搞怪遊樂園大冒險>電擊！豬蹄大作戰>風起雲湧的叢林冒險>風起雲湧 猛烈！大人帝國的反擊<br>D.電擊！豬蹄大作戰>搞怪遊樂園大冒險>風起雲湧 猛烈！大人帝國的反擊>風起雲湧的叢林冒險</div>
+            <div class="question-item">2. 溫泉激烈大決戰中，指宿跟後生掛的溫泉在哪?<br>A.鹿兒島；秋田 <br>B.秋田；熊本 <br>C.群馬；鹿耳島 <br>D.長野；秋田</div>
+            <div class="question-item">3. 黑暗珠珠大追擊中，魔人賈克保存期限到？<br>A.1996.12.05 <br>B.1996.12.31 <br>C.1997.12.20 <br>D.1997.12.25</div>
+            <div class="question-item">4. 在光榮燒肉之路中，小新對於熱海的筆劃敘述是?<br>A.一橫一豎一橫 右撇左撇一橫兩橫 <br>B.一橫兩橫一豎 左撇右撇一橫兩橫 <br>C.一橫兩橫一豎 右撇左撇一橫兩橫 <br>D.一橫一豎一橫 左撇右撇一橫兩橫</div>
+            <div class="question-item">5. 在雲黑齋的野心中，最終對戰按鍵順序是?<br>A.ABBAAB→→← <br>B.ABBAAB→←→ <br>C.ABAABB→→← <br>D.ABAAAB→←→</div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="ans3" maxlength="5" placeholder="輸入代碼">
+            <button onclick="checkStep(3, 'CABBA', 'success')">完成解密</button>
+        </div>
+        <div id="err3" class="error">!! 猴子們阿!不准再做壞事了 !!</div>
+    </div>
+
+    <div id="page-success" class="page" style="text-align:center;">
+        <h1 id="typewriter"></h1>
+        <h2 style="color:#fff;">[本關密碼：7516]</h2>
+    </div>
+</div>
+
+<canvas id="fireworks"></canvas>
+
+<script>
+    function nextPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+
+    function checkStep(stepNum, correctAns, nextId) {
+        const val = document.getElementById('ans' + stepNum).value.toUpperCase().trim();
+        if (val === correctAns) {
+            if (nextId === 'success') {
+                showFinal();
+            } else {
+                nextPage(nextId);
+            }
+        } else {
+            const err = document.getElementById('err' + stepNum);
+            err.style.visibility = 'visible';
+            setTimeout(() => { err.style.visibility = 'hidden'; }, 2000);
+        }
+    }
+
+    function showFinal() {
+        nextPage('page-success');
+        const msg = ">> 恭喜劉桑解鎖成功！\n>> 30 歲生日快樂！\n>> 你是我生命中最完美的 Code ♥";
+        let i = 0;
+        function type() {
+            if (i < msg.length) {
+                document.getElementById('typewriter').innerHTML += msg.charAt(i);
+                i++;
+                setTimeout(type, 80);
+            }
+        }
+        type();
+        initFireworks();
+    }
+
+    function initFireworks() {
+        const canvas = document.getElementById('fireworks');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particles = [];
+        function animate() {
+            ctx.fillStyle = 'rgba(10,10,10,0.2)';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            if(Math.random()<0.12) {
+                const x = Math.random()*canvas.width;
+                const y = Math.random()*canvas.height;
+                const color = `hsl(${Math.random()*360},100%,60%)`;
+                for(let i=0; i<35; i++) particles.push({x,y,sx:Math.random()*6-3,sy:Math.random()*6-3,c:color,o:1});
+            }
+            particles.forEach((p,idx) => {
+                p.x+=p.sx; p.y+=p.sy; p.o-=0.02;
+                ctx.globalAlpha=p.o; ctx.fillStyle=p.c;
+                ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();
+                if(p.o<=0) particles.splice(idx,1);
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+</script>
+
+</body>
+</html>
